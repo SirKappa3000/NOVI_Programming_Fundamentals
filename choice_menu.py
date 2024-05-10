@@ -38,6 +38,7 @@ class ChoiceMenu:
         keyboard.add_hotkey('left', self._previous)
         keyboard.add_hotkey('right', self._next)
         keyboard.wait('enter')
+        print()  # add a blank line to make the choice menu stand out
         return self.current_choice
 
     def _previous(self) -> None:
