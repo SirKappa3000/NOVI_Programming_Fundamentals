@@ -20,7 +20,7 @@ class ChoiceMenu:
         Call create_menu() to initialize the choice menu.
         """
 
-    def create_menu(self, choice_list: list[str]) -> str:
+    def create_menu(self, choice_list: list[str]) -> int:
         """
         Displays the menu and sets up keyboard navigation keys.
         Blocks execution until the user confirms a choice with the enter key.
@@ -29,7 +29,7 @@ class ChoiceMenu:
             choice_list (list[str]): A list of choices for the menu.
 
         Returns:
-            str: The selected choice after the user presses enter.
+            int: The index of the selected choice after the user presses enter.
         """
         self.choice_list: list[str] = choice_list
         self.current_choice: int = 0
@@ -38,8 +38,7 @@ class ChoiceMenu:
         keyboard.add_hotkey('left', self._previous)
         keyboard.add_hotkey('right', self._next)
         keyboard.wait('enter')
-        print()
-        return self.choice_list[self.current_choice]
+        return self.current_choice
 
     def _previous(self) -> None:
         if self.current_choice == 0:
@@ -65,3 +64,7 @@ class ChoiceMenu:
                 menu_string += f'  {choice}  '
 
         print('\r' + menu_string, end='')
+
+
+if __name__ == '__main__':
+    ChoiceMenu()
