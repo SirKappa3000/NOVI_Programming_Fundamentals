@@ -4,16 +4,21 @@ import requests
 
 
 def main():
-    welcome_window()
-    if input('Would you like some instructions? (y/N) ').strip().lower() == 'y':
-        show_instructions()
+    # welcome_window()
+    # if input('Would you like some instructions? (y/N) ').strip().lower() == 'y':
+    #     show_instructions()
 
     menu_class: ChoiceMenu = ChoiceMenu()  # Create a choice menu class
 
-    choices = ['choice 1', 'choice 2', 'choice 3']
-    choice_index: int = menu_class.create_menu(choices)
-    choice: str = choices[choice_index]
-    print(f'You chose {choice}')
+    print('Start or Stop the game now?')
+    if menu_class.create_menu(['Start', 'Stop']) == 1:
+        print('Bye now!')
+    else:
+        choices = ['choice 1', 'choice 2', 'choice 3']
+        for choice in choices:
+            choice_index: int = menu_class.create_menu(choices)
+            choice: str = choices[choice_index]
+            print(f'You chose {choice}', end='\n\n')
 
 
 def welcome_window() -> None:
@@ -35,7 +40,7 @@ def show_instructions():
     return
 
 
-def print_multiple_lines(lines_of_text: list[str], reading_time: float = 1.4) -> None:
+def print_multiple_lines(lines_of_text: list[str], reading_time: float = 1.3) -> None:
     print()  # add a blank line so the textblock stands out
     for text in lines_of_text:
         print(text)
