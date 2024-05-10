@@ -19,6 +19,8 @@ class ChoiceMenu:
 
         Call create_menu() to initialize the choice menu.
         """
+        keyboard.add_hotkey('left', self._previous)
+        keyboard.add_hotkey('right', self._next)
 
     def create_menu(self, choice_list: list[str]) -> int:
         """
@@ -35,14 +37,13 @@ class ChoiceMenu:
         self.current_choice: int = 0
 
         self._show_menu()
-        keyboard.add_hotkey('left', self._previous)
-        keyboard.add_hotkey('right', self._next)
         keyboard.wait('enter')
         print()  # add a blank line to make the choice menu stand out
         return self.current_choice
 
     def _previous(self) -> None:
         if self.current_choice == 0:
+            # Wrap around selection
             self.current_choice = len(self.choice_list)
         self.current_choice -= 1
         self._show_menu()
@@ -50,6 +51,7 @@ class ChoiceMenu:
     def _next(self) -> None:
         self.current_choice += 1
         if self.current_choice == len(self.choice_list):
+            # Wrap around selection
             self.current_choice = 0
         self._show_menu()
 
