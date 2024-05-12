@@ -4,24 +4,25 @@ import requests
 
 
 def main():
-    # welcome_window()
+    # show_welcome_text()
     # if input('Would you like some instructions? (y/N) ').strip().lower() == 'y':
     #     show_instructions()
 
-    menu_class: ChoiceMenu = ChoiceMenu()  # Create a choice menu class
+    menu_factory: ChoiceMenu = ChoiceMenu()  # Create a choice menu class
 
-    print('Start or Stop the game now?')
-    if menu_class.create_menu(['Start', 'Stop']) == 1:
-        print('Bye now!')
-    else:
-        choices = ['choice 1', 'choice 2', 'choice 3']
-        for choice in choices:
-            choice_index: int = menu_class.create_menu(choices)
-            choice: str = choices[choice_index]
-            print(f'You chose {choice}', end='\n\n')
+    print('Would you like to start a new game?')
+    while menu_factory.create_menu(['Yes', 'No']) == 0:
+        start_new_game()
+
+        print('Would you like to play again?')
+
+    print('Thank you for playing!\nGoobye!')
 
 
-def welcome_window() -> None:
+
+
+
+def show_welcome_text() -> None:
     print_multiple_lines([
         'Welcome to Totally Accurate Shopping Simulator (winkel-TASS)!',
         'You are going on a shopping spree with limited time.',
@@ -46,6 +47,10 @@ def print_multiple_lines(lines_of_text: list[str], reading_time: float = 1.3) ->
         print(text)
         time.sleep(reading_time)
     print()  # add a blank line to
+
+
+def start_new_game() -> None:
+    return
 
 
 if __name__ == '__main__':
