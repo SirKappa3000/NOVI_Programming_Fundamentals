@@ -1,6 +1,6 @@
 import time
 from choice_menu import ChoiceMenu
-from game import start_new_game
+from game import ShoppingGame
 
 def main():
     # show_welcome_text()
@@ -8,10 +8,11 @@ def main():
     #     show_instructions()
 
     menu_factory: ChoiceMenu = ChoiceMenu()  # Create a choice menu class
+    game = ShoppingGame()  # Create a shopping game class
 
     print('Would you like to start a new game?')
     while menu_factory.create_menu(['Yes', 'No']) == 0:
-        start_new_game()
+        game.start_new_game()
 
         print('Would you like to play again?')
 
