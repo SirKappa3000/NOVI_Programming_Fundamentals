@@ -1,6 +1,8 @@
+import sys
 import time
 from choice_menu import ChoiceMenu
 from game import ShoppingGame
+
 
 def main():
     # show_welcome_text()
@@ -17,9 +19,6 @@ def main():
         print('Would you like to play again?')
 
     print('Thank you for playing!\nGoobye!')
-
-
-
 
 
 def show_welcome_text() -> None:

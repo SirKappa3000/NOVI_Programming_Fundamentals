@@ -17,4 +17,5 @@ Module Programming fundamentals voor NOVI Hogeschool
 * PyCharm Powershell doesn't overwrite the first time you change choice_menu options.
   * workaround: open main.py through a regular terminal/command prompt:
     ```<path-to-your-python.exe> <path-to-this-folder>/main.py``` (backslash for windows)
-* 
+* After the program completes, multiple outputs are generated on the command line. 
+This is a bug in the keyboard module, but does not impact the game.

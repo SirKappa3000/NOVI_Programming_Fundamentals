@@ -23,7 +23,7 @@ class ShoppingGame:
 
     def start_new_game(self) -> None:
         print("Good luck and have fun!", end="\n\n")
-        self.countdown: int = 60
+        self.countdown: int = 10
         while self.countdown > 0:
             print(f'You have {self.countdown} seconds left.')
             chosen_category: str = self.choose_category()

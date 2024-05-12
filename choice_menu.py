@@ -19,8 +19,6 @@ class ChoiceMenu:
 
         Call create_menu() to initialize the choice menu.
         """
-        keyboard.add_hotkey('left', self._previous)
-        keyboard.add_hotkey('right', self._next)
 
     def create_menu(self, choice_list: list[str]) -> int:
         """
@@ -37,9 +35,11 @@ class ChoiceMenu:
         self.truncate_menu()
         self.current_choice: int = 0
 
+        keyboard.add_hotkey('left', self._previous)
+        keyboard.add_hotkey('right', self._next)
         self._show_menu()
         keyboard.wait('enter')
-        print()  # add a blank line to make the choice menu stand out
+        cleanup_keyboard_usage()
         return self.current_choice
 
     def truncate_menu(self):
@@ -79,6 +79,11 @@ class ChoiceMenu:
                 menu_string += f'  {choice}  '
 
         print('\r' + menu_string, end='')
+
+
+def cleanup_keyboard_usage():
+    keyboard.unhook_all()  # Zorgt ervoor dat er niet meer geluisterd wordt naar keyboard input.
+    print()  # add a blank line to make the choice menu stand out
 
 
 if __name__ == '__main__':
