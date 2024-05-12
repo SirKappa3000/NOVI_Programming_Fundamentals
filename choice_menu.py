@@ -34,12 +34,24 @@ class ChoiceMenu:
             int: The index of the selected choice after the user presses enter.
         """
         self.choice_list: list[str] = choice_list
+        self.truncate_menu()
         self.current_choice: int = 0
 
         self._show_menu()
         keyboard.wait('enter')
         print()  # add a blank line to make the choice menu stand out
         return self.current_choice
+
+    def truncate_menu(self):
+        max_length = 20
+
+        new_choice_list: list[str] = []
+        for choice in self.choice_list:
+            if len(choice) > max_length:
+                choice = choice[:max_length] + '..'
+            new_choice_list.append(choice)
+
+        self.choice_list = new_choice_list
 
     def _previous(self) -> None:
         if self.current_choice == 0:
