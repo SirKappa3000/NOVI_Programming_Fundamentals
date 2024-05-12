@@ -1,7 +1,6 @@
 import time
 from choice_menu import ChoiceMenu
-import requests
-
+from game import start_new_game
 
 def main():
     # show_welcome_text()
@@ -47,10 +46,6 @@ def print_multiple_lines(lines_of_text: list[str], reading_time: float = 1.3) ->
         print(text)
         time.sleep(reading_time)
     print()  # add a blank line to
-
-
-def start_new_game() -> None:
-    return
 
 
 if __name__ == '__main__':
