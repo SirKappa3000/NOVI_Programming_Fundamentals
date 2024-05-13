@@ -5,6 +5,10 @@ from game import ShoppingGame, Highscore, get_highscores, add_highscore
 
 
 def main():
+    """
+    The main entry point for the shopping game application.
+    This function orchestrates the flow of the game including starting new games, replaying, and viewing high scores.
+    """
     # show_welcome_text()
     # if input('Would you like some instructions? (y/N) ').strip().lower() == 'y':
     #     show_instructions()
@@ -31,6 +35,9 @@ def main():
 
 
 def show_welcome_text() -> None:
+    """
+    Displays a welcome message to the user at the beginning of the game.
+    """
     print_multiple_lines([
         'Welcome to Totally Accurate Shopping Simulator (winkel-TASS)!',
         'You are going on a shopping spree with limited time.',
@@ -41,6 +48,10 @@ def show_welcome_text() -> None:
 
 
 def show_instructions():
+    """
+    Provides detailed game instructions to the user.
+    Explains how to navigate and select options during the game.
+    """
     print_multiple_lines([
         'This game is all about making the right choices.',
         'When you get a selection of choices, use the left and right arrow keys to navigate.',
@@ -50,6 +61,13 @@ def show_instructions():
 
 
 def print_multiple_lines(lines_of_text: list[str], reading_time: float = 1.3) -> None:
+    """
+    Prints each line of a list of text lines with a delay, making it easier to read.
+
+    Parameters:
+    - lines_of_text (list[str]): The lines of text to be printed.
+    - reading_time (float): The time delay in seconds between printing each line.
+    """
     print()  # add a blank line so the textblock stands out
     for text in lines_of_text:
         print(text)
