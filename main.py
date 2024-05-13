@@ -1,7 +1,7 @@
 import sys
 import time
 from choice_menu import ChoiceMenu
-from game import ShoppingGame
+from game import ShoppingGame, Highscore, get_highscores, add_highscore
 
 
 def main():
@@ -13,10 +13,19 @@ def main():
     game = ShoppingGame()  # Create a shopping game class
 
     print('Would you like to start a new game?')
-    while menu_factory.create_menu(['Yes', 'No']) == 0:
+    while menu_factory.create_menu(['Yes', 'No']) != 1:
+
         game.start_new_game()
 
         print('Would you like to play again?')
+
+    print('Do you want to look at the current highscores?')
+    if menu_factory.create_menu(['Yes', 'No']) == 0:
+        highscore_list: list[Highscore] = get_highscores()
+        print('{:<12} {:<8}'.format('NAME', 'SCORE'))
+        for highscore in highscore_list:
+            print(f'{highscore.name:<12} {highscore.score:<8}')
+        print()
 
     print('Thank you for playing!\nGoobye!')
 

@@ -1,5 +1,4 @@
 import json
-
 import requests
 import random
 from choice_menu import ChoiceMenu
@@ -13,6 +12,12 @@ class Product:
         self.category: str = category
         self.description: str = description
         self.image: str = image
+
+
+class Highscore:
+    def __init__(self, name: str, score: float):
+        self.name: str = name
+        self.score: float = score
 
 
 class ShoppingGame:
@@ -37,13 +42,14 @@ class ShoppingGame:
 
     def choose_category(self) -> str:
         category_list: list[str] = get_random_categories()
+        print('Choose a category')
         choice_index: int = self.choice_menu_factory.create_menu(category_list)
         return category_list[choice_index]
 
     def choose_product(self, category: str) -> Product:
         product_list: list[Product] = get_random_products_in_category(category)
         product_name_list: list[str] = [product.title for product in product_list]
-
+        print('Choose a product')
         choice_index: int = self.choice_menu_factory.create_menu(product_name_list)
         return product_list[choice_index]
 
@@ -83,5 +89,22 @@ def get_random_products_in_category(category: str) -> list[Product]:
         print('Invalid category')
 
 
+def get_highscores() -> list[Highscore]:
+    with open('highscores.json') as higscores_file:
+        highscores: list[Highscore] = []
+        for score_dict in json.load(higscores_file):
+            highscores.append(Highscore(score_dict['name'], score_dict['score']))
+
+        return highscores
+
+
+def add_highscore(name: str, highscore: int) -> None:
+    highscores: list[Highscore] = get_highscores()
+    highscores.append(Highscore(name, highscore))
+
+    with open('highscores.json', mode='w') as highscores_file:
+        highscores_file.write(json.dumps(highscores))
+
+
 if __name__ == '__main__':
-    ShoppingGame()
+    ShoppingGame().start_new_game()
