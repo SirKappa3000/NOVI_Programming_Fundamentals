@@ -6,6 +6,17 @@ from choice_menu import ChoiceMenu
 
 class Product:
     def __init__(self, id, title, price, category, description, image):
+        """
+        Initializes a Product instance with detailed attributes about the product.
+
+        Parameters:
+        - id (int): Unique identifier for the product.
+        - title (str): Name of the product.
+        - price (float): Price of the product.
+        - category (str): Category the product belongs to.
+        - description (str): Description of the product.
+        - image (str): URL to the product's image.
+        """
         self.id: int = id
         self.title: str = title
         self.price: float = price
@@ -15,6 +26,13 @@ class Product:
 
 
 class Highscore:
+    """
+    Initializes a Highscore instance with player name and score.
+
+    Parameters:
+    - name (str): The player's name.
+    - score (float): The score achieved by the player.
+    """
     def __init__(self, name: str, score: float):
         self.name: str = name
         self.score: float = score
@@ -22,11 +40,17 @@ class Highscore:
 
 class ShoppingGame:
     def __init__(self):
+        """
+        Initializes a ShoppingGame instance with game settings.
+        """
         self.countdown: int = 60
         self.time_per_choice: int = 10
         self.choice_menu_factory: ChoiceMenu = ChoiceMenu()
 
     def start_new_game(self) -> None:
+        """
+        Starts a new game session, managing the game time and product selections.
+        """
         print("Good luck and have fun!", end="\n\n")
         self.countdown: int = 10
         while self.countdown > 0:
@@ -41,12 +65,27 @@ class ShoppingGame:
         return
 
     def choose_category(self) -> str:
+        """
+        Displays a menu of categories and allows the player to choose one.
+
+        Returns:
+        - (str): The chosen category.
+        """
         category_list: list[str] = get_random_categories()
         print('Choose a category')
         choice_index: int = self.choice_menu_factory.create_menu(category_list)
         return category_list[choice_index]
 
     def choose_product(self, category: str) -> Product:
+        """
+        Displays a menu of products from the chosen category and allows the player to select one.
+
+        Parameters:
+        - category (str): The chosen category from which to display products.
+
+        Returns:
+        - Product: The chosen product object.
+        """
         product_list: list[Product] = get_random_products_in_category(category)
         product_name_list: list[str] = [product.title for product in product_list]
         print('Choose a product')
@@ -57,6 +96,16 @@ class ShoppingGame:
 # Static function, does not need to be in class to be called.
 # private function, not recommended for use outside of this file.
 def _get(endpoint: str, params: dict = None) -> requests.Response:
+    """
+    Performs a GET request to the specified API endpoint.
+
+    Parameters:
+    - endpoint (str): The API endpoint to hit.
+    - params (dict): Optional parameters to be sent with the request.
+
+    Returns:
+    - requests.Response: The response object from the requests library.
+    """
     try:
         return requests.get('https://fakestoreapi.com/products/' + endpoint, params=params)
     except requests.exceptions.ConnectionError:
@@ -65,6 +114,12 @@ def _get(endpoint: str, params: dict = None) -> requests.Response:
 
 # Static function, does not need to be in class to be called.
 def get_random_categories() -> list[str]:
+    """
+    Fetches a random set of product categories from the API.
+
+    Returns:
+    - list[str]: A list of 3 random product categories.
+    """
     try:
         categories: list[str] = _get('categories').json()
         return random.sample(categories, 3)  # get 3 random items from the list
@@ -74,6 +129,15 @@ def get_random_categories() -> list[str]:
 
 # Static function, does not need to be in class to be called.
 def get_random_products_in_category(category: str) -> list[Product]:
+    """
+    Fetches a list of products within a specified category from the API.
+
+    Parameters:
+    - category (str): The product category to fetch products from.
+
+    Returns:
+    - list[Product]: A list of 3 random products from the specified category.
+    """
     try:
         response_dicts: list[{}] = _get(f'category/{category}').json()
         products: list[Product] = [
@@ -90,6 +154,12 @@ def get_random_products_in_category(category: str) -> list[Product]:
 
 
 def get_highscores() -> list[Highscore]:
+    """
+    Reads and returns high scores from a local JSON file.
+
+    Returns:
+    - list[Highscore]: A list of high score records.
+    """
     with open('highscores.json') as higscores_file:
         highscores: list[Highscore] = []
         for score_dict in json.load(higscores_file):
@@ -99,6 +169,13 @@ def get_highscores() -> list[Highscore]:
 
 
 def add_highscore(name: str, highscore: int) -> None:
+    """
+    Adds a new high score entry to the local JSON file and saves it.
+
+    Parameters:
+    - name (str): The player's name.
+    - highscore (int): The score to add.
+    """
     highscores: list[Highscore] = get_highscores()
     highscores.append(Highscore(name, highscore))
 
