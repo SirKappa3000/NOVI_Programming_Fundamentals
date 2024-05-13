@@ -10,8 +10,8 @@ Module Programming fundamentals voor NOVI Hogeschool
       1. ```https://pypi.org/project/keyboard/```
       2. ```https://pypi.org/project/requests/```
 3. Run main.py to start the application.
-   1. By using PyCharm, select your python version and click the green arrow
-   2. By using the command line using: ```<path-to-your-python.exe> <path-to-this-folder>/main.py```  (backslash for windows)
+   1. Using PyCharm: select your python version and click the green arrow
+   2. Using the command line: ```<path-to-your-python.exe> <path-to-this-folder>/main.py```  (backslash for windows)
 
 ### Known Bugs
 * PyCharm Powershell doesn't overwrite the first time you change choice_menu options.
