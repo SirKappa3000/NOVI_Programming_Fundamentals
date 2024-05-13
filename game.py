@@ -45,23 +45,33 @@ class ShoppingGame:
         """
         self.countdown: int = 60
         self.time_per_choice: int = 10
+        self.score: int = 0
         self.choice_menu_factory: ChoiceMenu = ChoiceMenu()
 
-    def start_new_game(self) -> None:
+    def start_new_game(self, player_name: str) -> None:
         """
         Starts a new game session, managing the game time and product selections.
         """
         print("Good luck and have fun!", end="\n\n")
-        self.countdown: int = 10
+        self.countdown = 30
+        self.score = 0
+
+        # main game loop
         while self.countdown > 0:
             print(f'You have {self.countdown} seconds left.')
             chosen_category: str = self.choose_category()
             chosen_product: Product = self.choose_product(chosen_category)
             print(f'You chose {chosen_product.title}')
             print(f'It costs €{chosen_product.price:.2f}')
+
+            # finalize round variables
+            self.score += chosen_product.price
             self.countdown -= self.time_per_choice
 
         print("Time's up!")
+        print(f"Your final scoring is €{self.score:.2f}.")
+        add_highscore(player_name, self.score)
+
         return
 
     def choose_category(self) -> str:
@@ -176,11 +186,12 @@ def add_highscore(name: str, highscore: int) -> None:
     - name (str): The player's name.
     - highscore (int): The score to add.
     """
-    highscores: list[Highscore] = get_highscores()
-    highscores.append(Highscore(name, highscore))
+    with open('highscores.json', mode='r') as highscores_file:
+        highscores_json = json.load(highscores_file)
+        highscores_json.append({'name': name, 'score': highscore})
 
-    with open('highscores.json', mode='w') as highscores_file:
-        highscores_file.write(json.dumps(highscores))
+        with open('highscores.json', 'w') as highscores_file_writable:
+            highscores_file_writable.write(json.dumps(highscores_json))
 
 
 if __name__ == '__main__':

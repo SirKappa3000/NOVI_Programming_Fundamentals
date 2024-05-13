@@ -9,9 +9,11 @@ def main():
     The main entry point for the shopping game application.
     This function orchestrates the flow of the game including starting new games, replaying, and viewing high scores.
     """
-    # show_welcome_text()
-    # if input('Would you like some instructions? (y/N) ').strip().lower() == 'y':
-    #     show_instructions()
+    player_name: str = get_string_input('What is your name? ')
+    show_welcome_text(player_name)
+
+    if input('Would you like some instructions? (y/N) ').strip().lower() == 'y':
+        show_instructions()
 
     menu_factory: ChoiceMenu = ChoiceMenu()  # Create a choice menu class
     game = ShoppingGame()  # Create a shopping game class
@@ -19,7 +21,7 @@ def main():
     print('Would you like to start a new game?')
     while menu_factory.create_menu(['Yes', 'No']) != 1:
 
-        game.start_new_game()
+        game.start_new_game(player_name)
 
         print('Would you like to play again?')
 
@@ -30,6 +32,15 @@ def main():
     print('Thank you for playing!\nGoobye!')
 
 
+def get_string_input(question: str) -> str:
+    is_valid: bool = False
+    while not is_valid:
+        try:
+            return input(question).strip()
+        except ValueError:
+            print('Please enter a valid string.')
+
+
 def print_highscore_table() -> None:
     """
     Prints the current highscores in table format.
@@ -37,16 +48,16 @@ def print_highscore_table() -> None:
     highscore_list: list[Highscore] = get_highscores()
     print('{:<12} {:<8}'.format('NAME', 'SCORE'))
     for highscore in highscore_list:
-        print(f'{highscore.name:<12} {highscore.score:<8}')
+        print(f'{highscore.name:<10}   {highscore.score:<8}')
     print()
 
 
-def show_welcome_text() -> None:
+def show_welcome_text(player_name: str) -> None:
     """
     Displays a welcome message to the user at the beginning of the game.
     """
     print_multiple_lines([
-        'Welcome to Totally Accurate Shopping Simulator (winkel-TASS)!',
+        f'Welcome {player_name} to Totally Accurate Shopping Simulator (winkel-TASS)!',
         'You are going on a shopping spree with limited time.',
         'Your objective: get the highest value products in your cart.',
         'Good luck!'
