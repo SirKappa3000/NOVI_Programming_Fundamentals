@@ -25,13 +25,20 @@ def main():
 
     print('Do you want to look at the current highscores?')
     if menu_factory.create_menu(['Yes', 'No']) == 0:
-        highscore_list: list[Highscore] = get_highscores()
-        print('{:<12} {:<8}'.format('NAME', 'SCORE'))
-        for highscore in highscore_list:
-            print(f'{highscore.name:<12} {highscore.score:<8}')
-        print()
+        print_highscore_table()
 
     print('Thank you for playing!\nGoobye!')
+
+
+def print_highscore_table() -> None:
+    """
+    Prints the current highscores in table format.
+    """
+    highscore_list: list[Highscore] = get_highscores()
+    print('{:<12} {:<8}'.format('NAME', 'SCORE'))
+    for highscore in highscore_list:
+        print(f'{highscore.name:<12} {highscore.score:<8}')
+    print()
 
 
 def show_welcome_text() -> None:
@@ -47,7 +54,7 @@ def show_welcome_text() -> None:
     return
 
 
-def show_instructions():
+def show_instructions() -> None:
     """
     Provides detailed game instructions to the user.
     Explains how to navigate and select options during the game.
