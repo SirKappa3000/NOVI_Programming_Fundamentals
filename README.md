@@ -15,7 +15,8 @@ Module Programming fundamentals voor NOVI Hogeschool
    2. Using the command line: ```<path-to-your-python.exe> <path-to-this-folder>/main.py```  (backslash for windows)
 
 ### Known Bugs
-* PyCharm Powershell doesn't overwrite the first time you change choice_menu options.
+* PyCharm Powershell doesn't overwrite the console text the first time you change choice_menu options, 
+thus printing the options a second time
   * workaround: open main.py through a regular terminal/command prompt:
     ```<path-to-your-python.exe> <path-to-this-folder>/main.py``` (backslash for windows)
 * After the program completes, multiple outputs (newlines) are generated on the command line. 

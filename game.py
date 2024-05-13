@@ -170,12 +170,16 @@ def get_highscores() -> list[Highscore]:
     Returns:
     - list[Highscore]: A list of high score records.
     """
-    with open('highscores.json') as higscores_file:
-        highscores: list[Highscore] = []
-        for score_dict in json.load(higscores_file):
-            highscores.append(Highscore(score_dict['name'], score_dict['score']))
+    try:
+        with open('highscores.json') as higscores_file:
+            highscores: list[Highscore] = []
+            for score_dict in json.load(higscores_file):
+                highscores.append(Highscore(score_dict['name'], score_dict['score']))
 
-        return highscores
+            return highscores
+    except FileNotFoundError:
+        print("To see the highscores, try opening this game from the actual game folder.")
+        return []
 
 
 def add_highscore(name: str, highscore: int) -> None:
@@ -186,13 +190,16 @@ def add_highscore(name: str, highscore: int) -> None:
     - name (str): The player's name.
     - highscore (int): The score to add.
     """
-    with open('highscores.json', mode='r') as highscores_file:
-        highscores_json = json.load(highscores_file)
-        highscores_json.append({'name': name, 'score': highscore})
+    try:
+        with open('highscores.json', mode='r') as highscores_file:
+            highscores_json = json.load(highscores_file)
+            highscores_json.append({'name': name, 'score': highscore})
 
-        with open('highscores.json', 'w') as highscores_file_writable:
-            highscores_file_writable.write(json.dumps(highscores_json))
+            with open('highscores.json', 'w') as highscores_file_writable:
+                highscores_file_writable.write(json.dumps(highscores_json))
+    except FileNotFoundError:
+        print("To see the highscores, try opening this game from the actual game folder.")
 
 
 if __name__ == '__main__':
-    ShoppingGame().start_new_game()
+    ShoppingGame().start_new_game('Test')
