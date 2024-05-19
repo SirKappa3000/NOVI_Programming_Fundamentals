@@ -60,8 +60,9 @@ def print_highscore_table() -> None:
     Prints the current highscores in table format.
     """
     highscore_list: list[Highscore] = get_highscores()
+    sorted_highscore_list = sorted(highscore_list, key=lambda some_highscore: int(some_highscore.score), reverse=True)
     print('{:<12} {:<8}'.format('NAME', 'SCORE'))
-    for highscore in highscore_list:
+    for highscore in sorted_highscore_list:
         print(f'{highscore.name:<10}   {highscore.score:<8}')
 
 
