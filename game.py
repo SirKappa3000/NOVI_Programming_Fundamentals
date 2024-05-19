@@ -63,6 +63,7 @@ class ShoppingGame:
             chosen_product: Product = self.choose_product(chosen_category)
             print(f'You chose {chosen_product.title}')
             print(f'It costs €{chosen_product.price:.2f}')
+            print()
 
             # finalize round variables
             self.score += chosen_product.price
@@ -70,6 +71,7 @@ class ShoppingGame:
 
         print("Time's up!")
         print(f"Your final scoring is €{self.score:.2f}.")
+        print()
         add_highscore(player_name, self.score)
 
         return

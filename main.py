@@ -25,10 +25,12 @@ def main():
 
         print('Would you like to play again?')
 
+    print()
     print('Do you want to look at the current highscores?')
     if menu_factory.create_menu(['Yes', 'No']) == 0:
         print_highscore_table()
 
+    print()
     print('Thank you for playing!\nGoobye!')
 
 
@@ -49,7 +51,6 @@ def print_highscore_table() -> None:
     print('{:<12} {:<8}'.format('NAME', 'SCORE'))
     for highscore in highscore_list:
         print(f'{highscore.name:<10}   {highscore.score:<8}')
-    print()
 
 
 def show_welcome_text(player_name: str) -> None:

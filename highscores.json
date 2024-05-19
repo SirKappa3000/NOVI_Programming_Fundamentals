@@ -1,1 +1,30 @@
-[{"name": "Peter", "score": 50.48}, {"name": "Sarah", "score": 40.95}, {"name": "Kane", "score": 96.02}, {"name": "kees", "score": 1136.29}, {"name": "kees", "score": 127.97}, {"name": "Bean", "score": 1227.99}]
+[
+    {
+        "name": "Peter",
+        "score": 50.48
+    },
+    {
+        "name": "Sarah",
+        "score": 40.95
+    },
+    {
+        "name": "Kane",
+        "score": 96.02
+    },
+    {
+        "name": "kees",
+        "score": 1136.29
+    },
+    {
+        "name": "kees",
+        "score": 127.97
+    },
+    {
+        "name": "Bean",
+        "score": 1227.99
+    },
+    {
+        "name": "John",
+        "score": 2389.99
+    }
+]
