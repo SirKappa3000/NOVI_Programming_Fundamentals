@@ -43,7 +43,7 @@ class ShoppingGame:
         """
         Initializes a ShoppingGame instance with game settings.
         """
-        self.countdown: int = 60
+        self.countdown: int = 30
         self.time_per_choice: int = 10
         self.score: int = 0
         self.choice_menu_factory: ChoiceMenu = ChoiceMenu()
@@ -196,7 +196,7 @@ def add_highscore(name: str, highscore: int) -> None:
             highscores_json.append({'name': name, 'score': highscore})
 
             with open('highscores.json', 'w') as highscores_file_writable:
-                highscores_file_writable.write(json.dumps(highscores_json))
+                highscores_file_writable.write(json.dumps(highscores_json, indent=4))
     except FileNotFoundError:
         print("To see the highscores, try opening this game from the actual game folder.")
 
