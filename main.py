@@ -19,7 +19,7 @@ def main():
     game = ShoppingGame()  # Create a shopping game class
 
     print('Would you like to start a new game?')
-    while menu_factory.create_menu(['Yes', 'No']) != 1:
+    while menu_factory.create_menu(['Yes', 'No']) == 0:  # Loop around, starting new games, until 'No' is chosen.
 
         game.start_new_game(player_name)
 
@@ -35,6 +35,18 @@ def main():
 
 
 def get_string_input(question: str) -> str:
+    """
+    Prompts the user with a question and returns the input string.
+
+    This function continues to prompt the user until a valid string input is received.
+    It handles exceptions that might occur if the input process encounters issues.
+
+    Parameters:
+    question (str): A string that represents the question to be asked to the user.
+
+    Returns:
+    str: The user's input as a string after stripping any leading/trailing whitespace.
+    """
     is_valid: bool = False
     while not is_valid:
         try:
